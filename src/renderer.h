@@ -2,9 +2,10 @@
 #define RENDERER_H_
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 #include <glm/common.hpp>
+
+#include "glfw.h"
 
 void render();
 

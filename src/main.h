@@ -2,11 +2,11 @@
 #define MAIN_H_
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 #include <iostream>
 
-#include "renderer.h" 
+#include "glfw.h"
+#include "renderer.h"
 
 int main();
 
