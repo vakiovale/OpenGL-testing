@@ -6,6 +6,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(OpenGL-app)
 
+# Set up spdlog
+add_subdirectory(lib/spdlog)
+
 # Set up GLFW
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -26,4 +29,4 @@ file(GLOB SRC_FILES
   "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
-target_link_libraries(${PROJECT_NAME} glad glfw glm)
+target_link_libraries(${PROJECT_NAME} spdlog glad glfw glm)

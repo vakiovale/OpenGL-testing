@@ -19,10 +19,13 @@ int main() {
 
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
+    Renderer renderer;
+    renderer.initialize();
+    
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
-        render();
-
+        renderer.render();
+        
         /* Swap Front and back buffers */
         glfwSwapBuffers(window);
 
