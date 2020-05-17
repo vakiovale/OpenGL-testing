@@ -1,11 +1,11 @@
-#include "main.h"
+#include "app.h"
 
-int main() {
+void run() {
     GLFWwindow *window;
 
     /* Initialize the library */
     if (!glfwInit()) {
-        return 0;
+        return;
     }
 
     /* Create a windowed mode window and its OpenGL context */
@@ -21,11 +21,11 @@ int main() {
 
     Renderer renderer;
     renderer.initialize();
-    
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         renderer.render();
-        
+
         /* Swap Front and back buffers */
         glfwSwapBuffers(window);
 
@@ -35,5 +35,4 @@ int main() {
 
     glfwDestroyWindow(window);
     glfwTerminate();
-    return 0;
 }

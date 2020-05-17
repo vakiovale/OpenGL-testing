@@ -1,5 +1,5 @@
-#ifndef MAIN_H_
-#define MAIN_H_
+#ifndef APP_H_
+#define APP_H_
 
 #include <glad/glad.h>
 
@@ -8,6 +8,8 @@
 #include "glfw.h"
 #include "renderer.h"
 
-int main();
+void run();
 
 #endif
+
+

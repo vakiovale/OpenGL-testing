@@ -22,11 +22,14 @@ target_include_directories(glad PUBLIC lib/glad/include/)
 # Set up GLM
 add_subdirectory(lib/glm)
 
-# Add src files
-include_directories(${PROJECT_SOURCE_DIR}/src)
-file(GLOB SRC_FILES
-  "${PROJECT_SOURCE_DIR}/src/*.h"
-  "${PROJECT_SOURCE_DIR}/src/*.cpp")
+# App
+set(LIBRARIES spdlog glad glfw glm)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
-add_executable(${PROJECT_NAME} ${SRC_FILES})
-target_link_libraries(${PROJECT_NAME} spdlog glad glfw glm)
+# Executable and linking
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} OpenGL-app-lib)
+
+# Set up tests
+include(CTest)
+add_subdirectory(tests)
