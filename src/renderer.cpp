@@ -1,23 +1,22 @@
 #include "renderer.h"
 
+void Renderer::createShader(GLuint program, std::string file,
+                            GLenum shaderType) {
+    GLuint shader = glCreateShader(shaderType);
+    const std::string shaderSource = fileLoader.load("resources/glsl/" + file);
+    const GLchar* source = shaderSource.c_str();
+    spdlog::info("Loaded shader:\n" + shaderSource);
+    glShaderSource(shader, 1, &source, NULL);
+    glCompileShader(shader);
+    glAttachShader(program, shader);
+}
+
 void Renderer::createVertexShader(GLuint program) {
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    const std::string vertexShaderSource = fileLoader.load("resources/glsl/vertex_shader.glsl");
-    const GLchar* source = vertexShaderSource.c_str();
-    spdlog::info("Loaded shader:\n" + vertexShaderSource);
-    glShaderSource(vertexShader, 1, &source, NULL);
-    glCompileShader(vertexShader);
-    glAttachShader(program, vertexShader);
+    createShader(program, "vertex_shader.glsl", GL_VERTEX_SHADER);
 }
 
 void Renderer::createFragmentShader(GLuint program) {
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    const std::string fragmentShaderSource = fileLoader.load("resources/glsl/fragment_shader.glsl");
-    const GLchar* source = fragmentShaderSource.c_str();
-    spdlog::info("Loaded shader:\n" + fragmentShaderSource);
-    glShaderSource(fragmentShader, 1, &source, NULL);
-    glCompileShader(fragmentShader);
-    glAttachShader(program, fragmentShader);
+    createShader(program, "fragment_shader.glsl", GL_FRAGMENT_SHADER);
 }
 
 void Renderer::initialize() {
