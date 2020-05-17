@@ -8,8 +8,9 @@
 #include "glfw.h"
 #include "renderer.h"
 
-void run();
+class App {
+   public:
+    void run();
+};
 
 #endif
-
-
