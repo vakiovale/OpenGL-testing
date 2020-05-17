@@ -6,6 +6,7 @@
 
 #include <glm/common.hpp>
 
+#include "file_loader.h"
 #include "glfw.h"
 
 class Renderer {
@@ -17,6 +18,7 @@ class Renderer {
     void createFragmentShader(GLuint program);
     GLuint vertexArrayObjects[NUMBER_OF_VERTEX_ARRAY];
     GLuint buffers[NUMBER_OF_BUFFER_OBJECTS];
+    const FileLoader fileLoader;
 
    public:
     void initialize();

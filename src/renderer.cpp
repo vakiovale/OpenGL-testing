@@ -2,28 +2,20 @@
 
 void Renderer::createVertexShader(GLuint program) {
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    const char* vertexShaderSource =
-        "#version 450 core\n"
-        "layout (location = 0) in vec4 vPosition;"
-        "void main()"
-        "{"
-        "gl_Position = vPosition;"
-        "}";
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    const std::string vertexShaderSource = fileLoader.load("resources/glsl/vertex_shader.glsl");
+    const GLchar* source = vertexShaderSource.c_str();
+    spdlog::info("Loaded shader:\n" + vertexShaderSource);
+    glShaderSource(vertexShader, 1, &source, NULL);
     glCompileShader(vertexShader);
     glAttachShader(program, vertexShader);
 }
 
 void Renderer::createFragmentShader(GLuint program) {
     GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    const char* fragmentShaderSource =
-        "#version 450 core\n"
-        "layout (location = 0) out vec4 fColor;"
-        "void main()"
-        "{"
-        "fColor = vec4(0.5, 0.4, 0.8, 1.0);"
-        "}";
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    const std::string fragmentShaderSource = fileLoader.load("resources/glsl/fragment_shader.glsl");
+    const GLchar* source = fragmentShaderSource.c_str();
+    spdlog::info("Loaded shader:\n" + fragmentShaderSource);
+    glShaderSource(fragmentShader, 1, &source, NULL);
     glCompileShader(fragmentShader);
     glAttachShader(program, fragmentShader);
 }

@@ -7,7 +7,8 @@
 
 class FileLoader {
    public:
-    std::string load(std::string file);
+    FileLoader() noexcept {};
+    std::string load(std::string file) const;
 };
 
 #endif
