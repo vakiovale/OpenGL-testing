@@ -1,7 +1,5 @@
 #include "renderer.h"
 
-#include <numeric>
-
 void Renderer::createVertexShader(GLuint program) {
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     const char* vertexShaderSource =
