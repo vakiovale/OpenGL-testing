@@ -1,6 +1,6 @@
 #include "message_callback.h"
 
-void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id,
+static void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id,
                                 GLenum severity, GLsizei length,
                                 const GLchar* message, const void* userParam) {
     const std::string callback_message =

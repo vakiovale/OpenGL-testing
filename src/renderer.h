@@ -14,7 +14,7 @@ class Renderer {
    private:
     enum VAO_ID { FIRST_VERTEX_ARRAY, NUMBER_OF_VERTEX_ARRAY };
     enum BUFFER_ID { FIRST_BUFFER_OBJECT, NUMBER_OF_BUFFER_OBJECTS };
-    enum ATTRIBUTE_ID { vPosition = 0 };
+    enum ATTRIBUTE_ID { vPosition = 0, vColor = 1 };
 
     void createShader(GLuint program, std::string file, GLenum shaderType);
     void createVertexShader(GLuint program);
