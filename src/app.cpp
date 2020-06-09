@@ -1,8 +1,4 @@
 #include "app.h"
-#include <exception>
-#include <stdexcept>
-#include "renderer.h"
-#include "spdlog/spdlog.h"
 
 App::App() {
     spdlog::info("Creating App");
