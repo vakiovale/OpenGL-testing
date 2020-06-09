@@ -8,9 +8,7 @@ SCENARIO("File loader", "[file]") {
         WHEN("when loading file to a string") {
             std::string file = "resources/test.txt";
             std::string content = file_loader.load(file);
-            THEN("string should match file's content") {
-                REQUIRE(content == "Hello World!\n");
-            }
+            THEN("string should match file's content") { REQUIRE(content == "Hello World!\n"); }
         }
     }
 }

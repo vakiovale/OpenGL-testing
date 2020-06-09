@@ -1,38 +1,46 @@
 #include "app.h"
+#include <exception>
+#include <stdexcept>
+#include "renderer.h"
+#include "spdlog/spdlog.h"
 
-void App::run() {
-    GLFWwindow *window;
+App::App() {
+    spdlog::info("Creating App");
 
-    /* Initialize the library */
     if (!glfwInit()) {
-        return;
+        throw std::runtime_error("Could not initialize GLFW");
     }
-    
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+}
+
+void App::initializeWindow() {
+    window = createWindow();
+    glfwMakeContextCurrent(window);
+    gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+}
+
+GLFWwindow* App::createWindow() {
+    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
     if (!window) {
         glfwTerminate();
     }
+    return window;
+}
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+App::~App() {
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    spdlog::info("App destroyed");
+}
 
-    gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
-    Renderer renderer;
+void App::run() {
+    initializeWindow();
+    Renderer renderer(window);
     renderer.initialize();
-
-    /* Loop until the user closes the window */
+    
     while (!glfwWindowShouldClose(window)) {
         renderer.render();
-
-        /* Swap Front and back buffers */
         glfwSwapBuffers(window);
-
-        /* Poll for and process events */
         glfwPollEvents();
     }
 
-    glfwDestroyWindow(window);
-    glfwTerminate();
 }

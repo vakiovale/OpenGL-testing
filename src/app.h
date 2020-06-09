@@ -2,6 +2,7 @@
 #define APP_H_
 
 #include <glad/glad.h>
+#include <spdlog/spdlog.h>
 
 #include <iostream>
 
@@ -9,7 +10,14 @@
 #include "renderer.h"
 
 class App {
+   private:
+    GLFWwindow* window;
+    GLFWwindow* createWindow();
+    void initializeWindow();
+
    public:
+    App();
+    ~App();
     void run();
 };
 

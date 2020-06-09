@@ -1,12 +1,11 @@
 #include "message_callback.h"
 
-static void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id,
-                                GLenum severity, GLsizei length,
-                                const GLchar* message, const void* userParam) {
-    const std::string callback_message =
-        "type: " + std::to_string(type) +
-        ", severity: " + std::to_string(severity) + ", message: " + " " +
-        std::string(message);
+static void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
+                                       GLsizei length, const GLchar* message,
+                                       const void* userParam) {
+    const std::string callback_message = "type: " + std::to_string(type) +
+                                         ", severity: " + std::to_string(severity) +
+                                         ", message: " + " " + std::string(message);
     if (type == GL_DEBUG_TYPE_ERROR) {
         spdlog::error(callback_message);
     } else {
