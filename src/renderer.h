@@ -9,7 +9,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "GLFW/glfw3.h"
 #include "file_loader.h"
 #include "glfw.h"
 #include "message_callback.h"
