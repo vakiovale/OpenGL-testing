@@ -15,7 +15,7 @@ void App::initializeWindow() {
 }
 
 GLFWwindow* App::createWindow() {
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
     if (!window) {
         glfwTerminate();
     }

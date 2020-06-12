@@ -12,6 +12,7 @@
 #include "file_loader.h"
 #include "glfw.h"
 #include "message_callback.h"
+#include "object_loader.h"
 
 class Renderer {
    private:

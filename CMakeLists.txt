@@ -22,8 +22,13 @@ target_include_directories(glad PUBLIC lib/glad/include/)
 # Set up GLM
 add_subdirectory(lib/glm)
 
+# Set up tinyobjloader
+add_library(tinyobjloader lib/tinyobjloader/tiny_obj_loader.h)
+set_target_properties(tinyobjloader PROPERTIES LINKER_LANGUAGE CXX)
+target_include_directories(tinyobjloader PUBLIC lib/tinyobjloader/)
+
 # App
-set(LIBRARIES spdlog glad glfw glm)
+set(LIBRARIES spdlog glad glfw glm tinyobjloader)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
 # Executable and linking
