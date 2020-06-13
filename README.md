@@ -4,5 +4,5 @@ Following dependencies are required in the /lib directory:
 - glad v0.1.33
 - glfw v3.3.2 (added as a CMake project)
 - glm v0.9.9 (added as a CMake project)
-- spdlog (added as a CMake project)
+- spdlog v1.6.0 (added as a CMake project)
 - tinyobjloader v1.0.6
