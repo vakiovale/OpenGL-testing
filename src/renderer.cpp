@@ -1,11 +1,4 @@
-
 #include "renderer.h"
-
-#include <algorithm>
-#include <iostream>
-#include <vector>
-
-#include "object_loader.h"
 
 std::string inputfile = "resources/objects/golf.obj";
 object loadedObject;
