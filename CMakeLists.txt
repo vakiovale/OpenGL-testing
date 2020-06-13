@@ -1,10 +1,20 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(OpenGL-app)
+
+# Set up Boost
+set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_DEBUG_LIBS OFF)
+set(Boost_USE_RELEASE_LIBS ON)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+set(BOOST_ROOT lib/boost)
+find_package(Boost 1.73.0 REQUIRED COMPONENTS regex)
+include_directories(${Boost_INCLUDE_DIRS})
 
 # Set up spdlog
 add_subdirectory(lib/spdlog)
@@ -28,7 +38,7 @@ set_target_properties(tinyobjloader PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(tinyobjloader PUBLIC lib/tinyobjloader/)
 
 # App
-set(LIBRARIES spdlog glad glfw glm tinyobjloader)
+set(LIBRARIES spdlog glad glfw glm tinyobjloader ${Boost_LIBRARIES})
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
 # Executable and linking
