@@ -1,0 +1,37 @@
+{
+    "objects": [
+        {
+            "file": "resources/objects/golf.obj",
+            "translate": {
+                "x": 10.0,
+                "y": -10.0,
+                "z": -5.0
+            }
+        },
+        {
+            "file": "resources/objects/sphere.obj",
+            "translate": {
+                "x": -30.0,
+                "y": 20.0,
+                "z": 0.0
+            }
+        },
+        {
+            "file": "resources/objects/cube.obj",
+            "translate": {
+                "x": -30.0,
+                "y": -20.0,
+                "z": 0.0
+            }
+        },
+        {
+            "file": "resources/objects/monkey.obj",
+            "translate": {
+                "x": 30.0,
+                "y": 10.0,
+                "z": -10.0
+            }
+        }
+
+    ]
+}
