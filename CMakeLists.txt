@@ -9,23 +9,18 @@ project(OpenGL-app)
 include(FetchContent)
 include(ExternalProject)
 
-set(BOOST_INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/boost)
+set(BOOST_INSTALL_DIR ${PROJECT_SOURCE_DIR}/lib/boost)
 if(NOT EXISTS ${BOOST_INSTALL_DIR})
-ExternalProject_Add(
-  ext_boost
-  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/boost
-  GIT_REPOSITORY https://github.com/boostorg/boost.git
-  GIT_TAG "boost-1.73.0"
-  CONFIGURE_COMMAND ./bootstrap.sh --without-libraries=python --prefix=${BOOST_INSTALL_DIR}
-  BUILD_COMMAND ./b2 install
-  BUILD_IN_SOURCE 1
-  INSTALL_COMMAND ""
-  LOG_DOWNLOAD ON
-  LOG_UPDATE ON
-  LOG_CONFIGURE ON
-  LOG_BUILD ON
-  LOG_INSTALL ON
-)
+  ExternalProject_Add(
+    ext_boost
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/boost
+    URL https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.gz
+    URL_HASH SHA256=9995e192e68528793755692917f9eb6422f3052a53c5e13ba278a228af6c7acf
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ./bootstrap.sh --without-libraries=python --prefix=${BOOST_INSTALL_DIR} && ./b2 install
+    BUILD_IN_SOURCE 1
+    INSTALL_COMMAND ""
+  )
 endif()
 set(Boost_INCLUDE_DIRS ${BOOST_INSTALL_DIR}/include)
 set(Boost_LIBRARIES ${BOOST_INSTALL_DIR}/lib/libboost_regex.a)
