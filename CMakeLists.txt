@@ -7,15 +7,28 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 project(OpenGL-app)
 
 include(FetchContent)
+include(ExternalProject)
 
-# Set up Boost
-set(Boost_USE_STATIC_LIBS ON)
-set(Boost_USE_DEBUG_LIBS OFF)
-set(Boost_USE_RELEASE_LIBS ON)
-set(Boost_USE_MULTITHREADED ON)
-set(Boost_USE_STATIC_RUNTIME OFF)
-set(BOOST_ROOT lib/boost)
-find_package(Boost 1.73.0 REQUIRED COMPONENTS)
+set(BOOST_INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/boost)
+if(NOT EXISTS ${BOOST_INSTALL_DIR})
+ExternalProject_Add(
+  ext_boost
+  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/boost
+  GIT_REPOSITORY https://github.com/boostorg/boost.git
+  GIT_TAG "boost-1.73.0"
+  CONFIGURE_COMMAND ./bootstrap.sh --without-libraries=python --prefix=${BOOST_INSTALL_DIR}
+  BUILD_COMMAND ./b2 install
+  BUILD_IN_SOURCE 1
+  INSTALL_COMMAND ""
+  LOG_DOWNLOAD ON
+  LOG_UPDATE ON
+  LOG_CONFIGURE ON
+  LOG_BUILD ON
+  LOG_INSTALL ON
+)
+endif()
+set(Boost_INCLUDE_DIRS ${BOOST_INSTALL_DIR}/include)
+set(Boost_LIBRARIES ${BOOST_INSTALL_DIR}/lib/libboost_regex.a)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Set up spdlog
