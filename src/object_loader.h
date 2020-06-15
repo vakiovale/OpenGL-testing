@@ -6,11 +6,8 @@
 
 #include <string>
 
-typedef struct {
-    std::vector<GLfloat> vertices;
-    std::vector<GLfloat> colors;
-} object;
+#include "raw_data_object.h"
 
-object loadObject(std::string file);
+raw_data_object loadObject(std::string file);
 
 #endif

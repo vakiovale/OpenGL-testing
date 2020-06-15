@@ -9,6 +9,7 @@ project(OpenGL-app)
 include(FetchContent)
 include(ExternalProject)
 
+# Set up Boost
 set(BOOST_INSTALL_DIR ${PROJECT_SOURCE_DIR}/lib/boost)
 if(NOT EXISTS ${BOOST_INSTALL_DIR})
   ExternalProject_Add(

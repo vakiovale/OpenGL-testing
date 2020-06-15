@@ -95,16 +95,20 @@ void Renderer::initialize(std::vector<object_resource> resources) {
     createProgram();
     createVAOsAndGenerateBuffers();
 
+    spdlog::info("Load and bind objects");
     for (std::size_t i = 0; i < resources.size(); i++) {
         loadAndBindObject(resources[i], this->vertex_array_objects[i],
                           this->vertex_buffer_objects[i]);
     }
+    spdlog::info("Loading objects finished");
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
+
+    spdlog::info("Renderer initialization finished");
 }
 
 void Renderer::render() {

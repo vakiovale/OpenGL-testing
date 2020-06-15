@@ -4,6 +4,8 @@
 #include <glad/glad.h>
 #include <spdlog/spdlog.h>
 
+#include <future>
+#include <thread>
 #include <glm/ext/scalar_constants.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -37,10 +39,10 @@ class Renderer {
     int width;
     int height;
     const FileLoader fileLoader;
-    GLFWwindow &window;
+    GLFWwindow& window;
 
    public:
-    Renderer(GLFWwindow *window);
+    Renderer(GLFWwindow* window);
     void initialize(std::vector<object_resource> resources);
     void render();
     void createProgram();

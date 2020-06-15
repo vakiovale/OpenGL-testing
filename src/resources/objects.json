@@ -31,6 +31,78 @@
                 "y": 10.0,
                 "z": -10.0
             }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": 0.0,
+                "y": -40.0,
+                "z": 0.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": 0.0,
+                "y": 40.0,
+                "z": 0.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": -100.0,
+                "y": 0.0,
+                "z": -200.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": 100.0,
+                "y": 0.0,
+                "z": -250.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": 140.0,
+                "y": 0.0,
+                "z": -250.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": -200.0,
+                "y": 150.0,
+                "z": -80.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": 30.0,
+                "y": 100.0,
+                "z": -150.0
+            }
+        },
+        {
+            "file": "resources/objects/torus.obj",
+            "translate": {
+                "x": 10.0,
+                "y": -5.0,
+                "z": -150.0
+            }
         }
 
     ]

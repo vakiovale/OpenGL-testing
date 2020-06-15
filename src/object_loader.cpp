@@ -1,8 +1,8 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "object_loader.h"
 
-object loadObject(std::string file) {
-    object result;
+raw_data_object loadObject(std::string file) {
+    raw_data_object result;
 
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
