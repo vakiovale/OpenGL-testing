@@ -13,7 +13,7 @@
 
 class App {
    private:
-    configuration conf;
+    Configuration conf;
     GLFWwindow* window;
     std::vector<ObjectResource> object_resources;
     GLFWwindow* createWindow();

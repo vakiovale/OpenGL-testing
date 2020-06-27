@@ -10,17 +10,17 @@ typedef struct {
     std::string name;
     uint width = 800;
     uint height = 600;
-} configuration;
+} Configuration;
 
 class AppConfiguration {
    private:
-    configuration conf;
+    Configuration conf;
     void resolveWindowConfig(boost::property_tree::ptree json);
     void resolveName(boost::property_tree::ptree json);
 
    public:
     void loadConfiguration(std::string configFile);
-    const configuration getConfig();
+    const Configuration getConfig();
 };
 
 #endif

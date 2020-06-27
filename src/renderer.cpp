@@ -1,5 +1,4 @@
 #include "renderer.h"
-#include "object_resource.h"
 
 Renderer::Renderer(GLFWwindow* window) : window(*window) {}
 

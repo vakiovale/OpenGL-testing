@@ -1,6 +1,6 @@
 #include "app_configuration.h"
 
-const configuration AppConfiguration::getConfig() { return this->conf; }
+const Configuration AppConfiguration::getConfig() { return this->conf; }
 
 void AppConfiguration::loadConfiguration(std::string configFile) {
     spdlog::info("Load configurations");
