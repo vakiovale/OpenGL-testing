@@ -7,6 +7,6 @@
 typedef struct {
     std::vector<GLfloat> vertices;
     std::vector<GLfloat> colors;
-} raw_data_object;
+} RawDataObject;
 
 #endif

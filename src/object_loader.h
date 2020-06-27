@@ -8,6 +8,6 @@
 
 #include "raw_data_object.h"
 
-raw_data_object loadObject(std::string file);
+RawDataObject loadObject(std::string file);
 
 #endif
