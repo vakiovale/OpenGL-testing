@@ -13,9 +13,9 @@
 
 class App {
    private:
-    Configuration conf;
-    GLFWwindow* window;
-    std::vector<ObjectResource> object_resources;
+    Configuration conf_;
+    GLFWwindow* window_;
+    std::vector<ObjectResource> object_resources_;
     GLFWwindow* createWindow();
     void initializeWindow();
 

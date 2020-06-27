@@ -21,25 +21,25 @@ class Renderer {
     enum ATTRIBUTE_ID { vPosition = 0, vColor = 1 };
     void createVAOsAndGenerateBuffers();
     void loadAndBindObject(const ObjectResource& resource, const GLuint VAO, const GLuint BUFFER);
-    void createShader(GLuint program, std::string file, GLenum shaderType);
+    void createShader(GLuint program, std::string file, GLenum shader_type);
     void createVertexShader(GLuint program);
     void createFragmentShader(GLuint program);
     glm::mat4 setupCameraPosition() const;
-    glm::mat4 selectCameraLens(float fieldOfView) const;
+    glm::mat4 selectCameraLens(float field_of_view) const;
     glm::mat4 setupModel() const;
     glm::mat4 createMVP() const;
     glm::mat4 createModel(const ObjectResource& resource) const;
 
     void draw();
 
-    std::vector<ObjectResource> resources;
-    std::vector<GLuint> vertex_array_objects;
-    std::vector<GLuint> vertex_buffer_objects;
-    GLuint program;
+    std::vector<ObjectResource> resources_;
+    std::vector<GLuint> vertex_array_objects_;
+    std::vector<GLuint> vertex_buffer_objects_;
+    GLuint program_;
 
-    int width;
-    int height;
-    const FileLoader fileLoader;
+    int width_;
+    int height_;
+    const FileLoader file_loader_;
     GLFWwindow& window;
 
    public:

@@ -1,12 +1,12 @@
 #include "app_configuration.h"
 
-const Configuration AppConfiguration::getConfig() { return this->conf; }
+const Configuration AppConfiguration::getConfig() { return conf_; }
 
-void AppConfiguration::loadConfiguration(std::string configFile) {
+void AppConfiguration::loadConfiguration(std::string config_file) {
     spdlog::info("Load configurations");
     try {
         boost::property_tree::ptree json;
-        boost::property_tree::read_json(configFile, json);
+        boost::property_tree::read_json(config_file, json);
 
         resolveWindowConfig(json);
         resolveName(json);
@@ -26,15 +26,14 @@ void AppConfiguration::resolveWindowConfig(boost::property_tree::ptree json) {
     } else {
         spdlog::info("Width: " + std::to_string(width.value()));
         spdlog::info("Height: " + std::to_string(height.value()));
-        this->conf.width = width.value();
-        this->conf.height = height.value();
+        conf_.width = width.value();
+        conf_.height = height.value();
     }
 }
 
 void AppConfiguration::resolveName(boost::property_tree::ptree json) {
     boost::optional<std::string> name = json.get_optional<std::string>("name");
     if (name.has_value()) {
-        this->conf.name = name.value();
+        conf_.name = name.value();
     }
 }
-

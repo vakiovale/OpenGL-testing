@@ -4,7 +4,7 @@ App::App() {
     spdlog::info("Creating App");
     AppConfiguration configuration;
     configuration.loadConfiguration("resources/config.json");
-    this->conf = configuration.getConfig();
+    conf_ = configuration.getConfig();
 
     if (!glfwInit()) {
         throw std::runtime_error("Could not initialize GLFW");
@@ -12,33 +12,33 @@ App::App() {
 }
 
 App::~App() {
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(window_);
     glfwTerminate();
     spdlog::info("App destroyed");
 }
 
 void App::run() {
     initializeWindow();
-    Renderer renderer(window);
-    this->object_resources = initializeResourceObjects();
-    renderer.initialize(this->object_resources);
+    Renderer renderer(window_);
+    object_resources_ = initializeResourceObjects();
+    renderer.initialize(object_resources_);
 
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window_)) {
         renderer.render();
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(window_);
         glfwPollEvents();
     }
 }
 
 void App::initializeWindow() {
-    window = createWindow();
-    glfwMakeContextCurrent(window);
+    window_ = createWindow();
+    glfwMakeContextCurrent(window_);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 }
 
 GLFWwindow* App::createWindow() {
     GLFWwindow* window =
-        glfwCreateWindow(this->conf.width, this->conf.height, this->conf.name.c_str(), NULL, NULL);
+        glfwCreateWindow(conf_.width, conf_.height, conf_.name.c_str(), NULL, NULL);
     if (!window) {
         glfwTerminate();
     }

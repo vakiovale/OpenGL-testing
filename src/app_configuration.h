@@ -14,12 +14,12 @@ typedef struct {
 
 class AppConfiguration {
    private:
-    Configuration conf;
+    Configuration conf_;
     void resolveWindowConfig(boost::property_tree::ptree json);
     void resolveName(boost::property_tree::ptree json);
 
    public:
-    void loadConfiguration(std::string configFile);
+    void loadConfiguration(std::string config_file);
     const Configuration getConfig();
 };
 

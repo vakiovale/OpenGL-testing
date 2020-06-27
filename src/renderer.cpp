@@ -3,27 +3,27 @@
 Renderer::Renderer(GLFWwindow* window) : window(*window) {}
 
 Renderer::~Renderer() {
-    glDeleteBuffers(this->vertex_buffer_objects.size(), this->vertex_buffer_objects.data());
-    glDeleteVertexArrays(this->vertex_array_objects.size(), this->vertex_array_objects.data());
-    glDeleteProgram(this->program);
+    glDeleteBuffers(vertex_buffer_objects_.size(), vertex_buffer_objects_.data());
+    glDeleteVertexArrays(vertex_array_objects_.size(), vertex_array_objects_.data());
+    glDeleteProgram(program_);
     spdlog::info("Renderer destroyed");
 }
 
 void Renderer::createProgram() {
-    this->program = glCreateProgram();
+    program_ = glCreateProgram();
 
-    createVertexShader(this->program);
-    createFragmentShader(this->program);
+    createVertexShader(program_);
+    createFragmentShader(program_);
 
-    glLinkProgram(this->program);
-    glUseProgram(this->program);
+    glLinkProgram(program_);
+    glUseProgram(program_);
 }
 
-void Renderer::createShader(GLuint program, std::string file, GLenum shaderType) {
-    GLuint shader = glCreateShader(shaderType);
-    const std::string shaderSource = fileLoader.load("resources/glsl/" + file);
-    const GLchar* source = shaderSource.c_str();
-    spdlog::debug("Loaded shader:\n" + shaderSource);
+void Renderer::createShader(GLuint program, std::string file, GLenum shader_type) {
+    GLuint shader = glCreateShader(shader_type);
+    const std::string shader_source = file_loader_.load("resources/glsl/" + file);
+    const GLchar* source = shader_source.c_str();
+    spdlog::debug("Loaded shader:\n" + shader_source);
     glShaderSource(shader, 1, &source, NULL);
     glCompileShader(shader);
     glAttachShader(program, shader);
@@ -38,36 +38,36 @@ void Renderer::createFragmentShader(GLuint program) {
     createShader(program, "fragment_shader.glsl", GL_FRAGMENT_SHADER);
 }
 
-glm::mat4 Renderer::selectCameraLens(float fieldOfView) const {
-    return glm::perspective(glm::radians(fieldOfView), (float)this->width / (float)this->height,
-                            0.1f, 10000.0f);
+glm::mat4 Renderer::selectCameraLens(float field_of_view) const {
+    return glm::perspective(glm::radians(field_of_view), (float)width_ / (float)height_, 0.1f,
+                            10000.0f);
 }
 
 glm::mat4 Renderer::setupCameraPosition() const {
-    glm::vec3 cameraPosition = glm::vec3(4, 3, 20);
-    glm::vec3 cameraLookAt = glm::vec3();
-    glm::vec3 cameraRotation = glm::vec3(0, 1, 0);
-    return glm::lookAt(cameraPosition, cameraLookAt, cameraRotation);
+    glm::vec3 camera_position = glm::vec3(4, 3, 20);
+    glm::vec3 camera_look_at = glm::vec3();
+    glm::vec3 camera_rotation = glm::vec3(0, 1, 0);
+    return glm::lookAt(camera_position, camera_look_at, camera_rotation);
 }
 
 glm::mat4 Renderer::setupModel() const {
     glm::mat4 model = glm::mat4(1.0f);
     const float angle = glfwGetTime() * 1.0f;
-    glm::mat4 newTranslate = glm::translate(glm::vec3(0.0f, sin(angle) * 10.0f, 0.0f));
+    glm::mat4 new_translate = glm::translate(glm::vec3(0.0f, sin(angle) * 10.0f, 0.0f));
     glm::mat4 scale = glm::scale(glm::vec3(10.0f));
     glm::mat4 rotate = glm::rotate(angle, glm::vec3(0.0f, 1.0f, 0.0f));
-    return newTranslate * rotate * scale * model;
+    return new_translate * rotate * scale * model;
 }
 
 void Renderer::createVAOsAndGenerateBuffers() {
-    GLuint vaos[this->resources.size()];
-    GLuint buffers[this->resources.size()];
-    glCreateVertexArrays(this->resources.size(), vaos);
-    glGenBuffers(this->resources.size(), buffers);
+    GLuint vaos[resources_.size()];
+    GLuint buffers[resources_.size()];
+    glCreateVertexArrays(resources_.size(), vaos);
+    glGenBuffers(resources_.size(), buffers);
 
-    for (std::size_t i = 0; i < this->resources.size(); i++) {
-        this->vertex_array_objects.push_back(vaos[i]);
-        this->vertex_buffer_objects.push_back(buffers[i]);
+    for (std::size_t i = 0; i < resources_.size(); i++) {
+        vertex_array_objects_.push_back(vaos[i]);
+        vertex_buffer_objects_.push_back(buffers[i]);
     }
 }
 
@@ -96,23 +96,22 @@ void Renderer::initialize(std::vector<ObjectResource> resources) {
     spdlog::info("Initializing OpenGL");
     enableDebug();
 
-    this->resources = resources;
+    resources_ = resources;
 
-    glfwGetWindowSize(&window, &width, &height);
+    glfwGetWindowSize(&window, &width_, &height_);
 
     createProgram();
     createVAOsAndGenerateBuffers();
 
     spdlog::info("Load and bind objects");
-    for (std::size_t i = 0; i < resources.size(); i++) {
-        loadAndBindObject(resources[i], this->vertex_array_objects[i],
-                          this->vertex_buffer_objects[i]);
+    for (std::size_t i = 0; i < resources_.size(); i++) {
+        loadAndBindObject(resources_[i], vertex_array_objects_[i], vertex_buffer_objects_[i]);
     }
     spdlog::info("Loading objects finished");
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glFrontFace(GL_CCW);
-    //glEnable(GL_CULL_FACE);
+    // glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
 
@@ -139,12 +138,12 @@ void Renderer::draw() {
     glm::mat4 projection = selectCameraLens(120.0f);
     glm::mat4 view = setupCameraPosition();
 
-    for (std::size_t i = 0; i < this->resources.size(); i++) {
-        const auto& resource = this->resources[i];
+    for (std::size_t i = 0; i < resources_.size(); i++) {
+        const auto& resource = resources_[i];
         glm::mat4 model = createModel(resource);
         glm::mat4 mvp = projection * view * model;
 
-        glBindVertexArray(this->vertex_array_objects[i]);
+        glBindVertexArray(vertex_array_objects_[i]);
         glUniformMatrix4fv(2, 1, GL_FALSE, glm::value_ptr(mvp));
         glDrawArrays(GL_TRIANGLES, 0, resource.object.vertices.size() / 3);
     }
