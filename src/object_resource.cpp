@@ -1,8 +1,8 @@
 #include "object_resource.h"
 
-object_resource loadResource(
+ObjectResource loadResource(
     std::pair<std::basic_string<char>, boost::property_tree::ptree> object) {
-    object_resource result;
+    ObjectResource result;
     std::string file = object.second.get<std::string>("file");
     result.file = file;
     result.object = loadObject(file);
@@ -18,9 +18,9 @@ object_resource loadResource(
     return result;
 }
 
-std::vector<object_resource> loadResources(
+std::vector<ObjectResource> loadResources(
     std::vector<std::pair<std::basic_string<char>, boost::property_tree::ptree>> objects) {
-    std::vector<object_resource> resources;
+    std::vector<ObjectResource> resources;
     for (auto& object : objects) {
         resources.push_back(loadResource(object));
     }
@@ -32,16 +32,16 @@ unsigned int numberOfThreadsToUse() {
     return std::thread::hardware_concurrency() > 0 ? std::thread::hardware_concurrency() : 2;
 }
 
-std::vector<object_resource> initializeResourceObjects() {
+std::vector<ObjectResource> initializeResourceObjects() {
     spdlog::info("Loading resources from objects.json");
-    std::vector<object_resource> resources;
+    std::vector<ObjectResource> resources;
     try {
         boost::property_tree::ptree json;
         boost::property_tree::read_json("resources/objects.json", json);
         auto objects = json.get_child("objects");
         spdlog::info(std::to_string(objects.size()) + " number of objects to load");
 
-        std::vector<std::future<std::vector<object_resource>>> futures;
+        std::vector<std::future<std::vector<ObjectResource>>> futures;
         unsigned int num_of_cpu_threads = numberOfThreadsToUse();
         unsigned int batch_size = std::floor((float)objects.size() / num_of_cpu_threads);
 

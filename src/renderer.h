@@ -5,11 +5,11 @@
 #include <spdlog/spdlog.h>
 
 #include <future>
-#include <thread>
 #include <glm/ext/scalar_constants.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/transform.hpp>
+#include <thread>
 
 #include "file_loader.h"
 #include "glfw.h"
@@ -20,7 +20,7 @@ class Renderer {
    private:
     enum ATTRIBUTE_ID { vPosition = 0, vColor = 1 };
     void createVAOsAndGenerateBuffers();
-    void loadAndBindObject(const object_resource& resource, const GLuint VAO, const GLuint BUFFER);
+    void loadAndBindObject(const ObjectResource& resource, const GLuint VAO, const GLuint BUFFER);
     void createShader(GLuint program, std::string file, GLenum shaderType);
     void createVertexShader(GLuint program);
     void createFragmentShader(GLuint program);
@@ -28,11 +28,11 @@ class Renderer {
     glm::mat4 selectCameraLens(float fieldOfView) const;
     glm::mat4 setupModel() const;
     glm::mat4 createMVP() const;
-    glm::mat4 createModel(const object_resource& resource) const;
+    glm::mat4 createModel(const ObjectResource& resource) const;
 
     void draw();
 
-    std::vector<object_resource> resources;
+    std::vector<ObjectResource> resources;
     std::vector<GLuint> vertex_array_objects;
     std::vector<GLuint> vertex_buffer_objects;
     GLuint program;
@@ -45,7 +45,7 @@ class Renderer {
    public:
     Renderer(GLFWwindow* window);
     ~Renderer();
-    void initialize(std::vector<object_resource> resources);
+    void initialize(std::vector<ObjectResource> resources);
     void render();
     void createProgram();
 };

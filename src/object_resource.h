@@ -19,11 +19,11 @@ typedef struct {
     RawDataObject object;
     glm::vec3 translate;
     glm::vec3 scale;
-} object_resource;
+} ObjectResource;
 
-object_resource loadResource(
+ObjectResource loadResource(
     std::pair<std::basic_string<char>, boost::property_tree::ptree> object);
 
-std::vector<object_resource> initializeResourceObjects();
+std::vector<ObjectResource> initializeResourceObjects();
 
 #endif

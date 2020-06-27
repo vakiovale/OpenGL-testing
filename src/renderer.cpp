@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "object_resource.h"
 
 Renderer::Renderer(GLFWwindow* window) : window(*window) {}
 
@@ -71,7 +72,7 @@ void Renderer::createVAOsAndGenerateBuffers() {
     }
 }
 
-void Renderer::loadAndBindObject(const object_resource& resource, const GLuint VAO,
+void Renderer::loadAndBindObject(const ObjectResource& resource, const GLuint VAO,
                                  const GLuint BUFFER) {
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, BUFFER);
@@ -92,7 +93,7 @@ void Renderer::loadAndBindObject(const object_resource& resource, const GLuint V
     glEnableVertexAttribArray(vColor);
 }
 
-void Renderer::initialize(std::vector<object_resource> resources) {
+void Renderer::initialize(std::vector<ObjectResource> resources) {
     spdlog::info("Initializing OpenGL");
     enableDebug();
 
@@ -126,7 +127,7 @@ void Renderer::render() {
     draw();
 }
 
-glm::mat4 Renderer::createModel(const object_resource& resource) const {
+glm::mat4 Renderer::createModel(const ObjectResource& resource) const {
     const float angle = glfwGetTime() * 1.0f;
     glm::mat4 translate =
         glm::translate(glm::vec3(0.0f, sin(angle) * 10.0f, 0.0f) + resource.translate);
