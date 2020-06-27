@@ -7,5 +7,5 @@ out vec4 fColor;
 
 void main() {
     gl_Position = projection * vPosition;
-    fColor = color;
+    fColor = vec4(1.21 * normalize(abs(vPosition)).xyz, 1);
 }

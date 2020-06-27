@@ -35,6 +35,7 @@ class Renderer {
     std::vector<object_resource> resources;
     std::vector<GLuint> vertex_array_objects;
     std::vector<GLuint> vertex_buffer_objects;
+    GLuint program;
 
     int width;
     int height;
@@ -43,6 +44,7 @@ class Renderer {
 
    public:
     Renderer(GLFWwindow* window);
+    ~Renderer();
     void initialize(std::vector<object_resource> resources);
     void render();
     void createProgram();

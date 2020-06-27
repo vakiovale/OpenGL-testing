@@ -8,6 +8,7 @@
 #include <future>
 #include <glm/glm.hpp>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "object_loader.h"
@@ -17,6 +18,7 @@ typedef struct {
     std::string file;
     raw_data_object object;
     glm::vec3 translate;
+    glm::vec3 scale;
 } object_resource;
 
 object_resource loadResource(

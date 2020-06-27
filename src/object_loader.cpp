@@ -28,9 +28,9 @@ raw_data_object loadObject(std::string file) {
                 result.vertices.push_back(vx);
                 result.vertices.push_back(vy);
                 result.vertices.push_back(vz);
-                result.colors.push_back(0.3f + vx);
-                result.colors.push_back(0.3f + vy);
-                result.colors.push_back(0.3f + vz);
+                result.colors.push_back(std::abs(vz));
+                result.colors.push_back(std::abs(vz));
+                result.colors.push_back(std::abs(vz));
             }
             index_offset += fv;
         }

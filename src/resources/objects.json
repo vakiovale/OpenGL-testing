@@ -5,7 +5,7 @@
             "translate": {
                 "x": 10.0,
                 "y": -10.0,
-                "z": -5.0
+                "z": -80.0
             }
         },
         {
@@ -13,13 +13,13 @@
             "translate": {
                 "x": -30.0,
                 "y": 20.0,
-                "z": 0.0
+                "z": -50.0
             }
         },
         {
             "file": "resources/objects/cube.obj",
             "translate": {
-                "x": -30.0,
+                "x": -50.0,
                 "y": -20.0,
                 "z": 0.0
             }
@@ -30,14 +30,6 @@
                 "x": 30.0,
                 "y": 10.0,
                 "z": -10.0
-            }
-        },
-        {
-            "file": "resources/objects/torus.obj",
-            "translate": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
             }
         },
         {
@@ -103,7 +95,185 @@
                 "y": -5.0,
                 "z": -150.0
             }
+        },
+        {
+            "file": "resources/objects/spaceship2.obj",
+            "translate": {
+                "x": 30.0,
+                "y": -20.0,
+                "z": -20.0
+            }
+        },
+        {
+            "file": "resources/objects/castle2.obj",
+            "translate": {
+                "x": -50.0,
+                "y": -200.0,
+                "z": -1000.0
+            }
+        },
+        {
+            "file": "resources/objects/spaceship2.obj",
+            "translate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1000.0
+            }
+        },
+        {
+            "file": "resources/objects/tuulimylly.obj",
+            "translate": {
+                "x": -50.0,
+                "y": -200.0,
+                "z": -1000.0
+            }
+        },
+        {
+            "file": "resources/objects/tuulimylly.obj",
+            "translate": {
+                "x": -50.0,
+                "y": -200.0,
+                "z": -300.0
+            }
+        },
+        {
+            "file": "resources/objects/tuulimylly.obj",
+            "translate": {
+                "x": -250.0,
+                "y": -200.0,
+                "z": -300.0
+            }
+        },
+        {
+            "file": "resources/objects/tuulimylly.obj",
+            "translate": {
+                "x": -550.0,
+                "y": -200.0,
+                "z": -300.0
+            }
+        },
+        {
+            "file": "resources/objects/tuulimylly.obj",
+            "translate": {
+                "x": -1150.0,
+                "y": -500.0,
+                "z": -400.0
+            }
+        },
+        {
+            "file": "resources/objects/tuulimylly.obj",
+            "translate": {
+                "x": -850.0,
+                "y": -400.0,
+                "z": -500.0
+            }
+        },
+        {
+            "file": "resources/objects/tuulimylly.obj",
+            "translate": {
+                "x": -950.0,
+                "y": -300.0,
+                "z": -600.0
+            }
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 45,
+                "y": -5,
+                "z": 7
+            },
+            "scale": 5.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 40,
+                "y": 0,
+                "z": -7
+            },
+            "scale": 4.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 35,
+                "y": -15,
+                "z": -14
+            },
+            "scale": 6.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 30,
+                "y": -5,
+                "z": -20
+            },
+            "scale": 5.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 25,
+                "y": 20,
+                "z": -30
+            },
+            "scale": 6.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 20,
+                "y": -5,
+                "z": -10
+            },
+            "scale": 6.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 15,
+                "y": -5,
+                "z": -60
+            },
+            "scale": 4.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 10,
+                "y": -5,
+                "z": -5
+            },
+            "scale": 6.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": 5,
+                "y": -5,
+                "z": 7
+            },
+            "scale": 3.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": -5,
+                "y": -5,
+                "z": 7
+            },
+            "scale": 4.0
+        },
+        {
+            "file": "resources/objects/meteorite.obj",
+            "translate": {
+                "x": -15,
+                "y": -5,
+                "z": 7
+            },
+            "scale": 5.0
         }
-
     ]
 }

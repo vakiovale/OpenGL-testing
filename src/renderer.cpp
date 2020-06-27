@@ -2,14 +2,21 @@
 
 Renderer::Renderer(GLFWwindow* window) : window(*window) {}
 
+Renderer::~Renderer() {
+    glDeleteBuffers(this->vertex_buffer_objects.size(), this->vertex_buffer_objects.data());
+    glDeleteVertexArrays(this->vertex_array_objects.size(), this->vertex_array_objects.data());
+    glDeleteProgram(this->program);
+    spdlog::info("Renderer destroyed");
+}
+
 void Renderer::createProgram() {
-    GLuint program = glCreateProgram();
+    this->program = glCreateProgram();
 
-    createVertexShader(program);
-    createFragmentShader(program);
+    createVertexShader(this->program);
+    createFragmentShader(this->program);
 
-    glLinkProgram(program);
-    glUseProgram(program);
+    glLinkProgram(this->program);
+    glUseProgram(this->program);
 }
 
 void Renderer::createShader(GLuint program, std::string file, GLenum shaderType) {
@@ -20,6 +27,7 @@ void Renderer::createShader(GLuint program, std::string file, GLenum shaderType)
     glShaderSource(shader, 1, &source, NULL);
     glCompileShader(shader);
     glAttachShader(program, shader);
+    glDeleteShader(shader);
 }
 
 void Renderer::createVertexShader(GLuint program) {
@@ -102,9 +110,9 @@ void Renderer::initialize(std::vector<object_resource> resources) {
     }
     spdlog::info("Loading objects finished");
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glFrontFace(GL_CCW);
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
 
@@ -122,7 +130,7 @@ glm::mat4 Renderer::createModel(const object_resource& resource) const {
     const float angle = glfwGetTime() * 1.0f;
     glm::mat4 translate =
         glm::translate(glm::vec3(0.0f, sin(angle) * 10.0f, 0.0f) + resource.translate);
-    glm::mat4 scale = glm::scale(glm::vec3(10.0f));
+    glm::mat4 scale = glm::scale(resource.scale);
     glm::mat4 rotate = glm::rotate(angle, glm::vec3(0.0f, 1.0f, 0.0f));
     return translate * rotate * scale;
 }

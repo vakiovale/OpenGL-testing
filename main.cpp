@@ -1,4 +1,5 @@
 #include <exception>
+
 #include "src/app.h"
 
 void runApplication() {
