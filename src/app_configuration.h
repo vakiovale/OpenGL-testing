@@ -4,6 +4,7 @@
 #include <spdlog/spdlog.h>
 
 #include <boost/property_tree/json_parser.hpp>
+#include <exception>
 #include <string>
 
 typedef struct {

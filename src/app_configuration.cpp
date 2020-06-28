@@ -13,7 +13,7 @@ void AppConfiguration::loadConfiguration(std::string config_file) {
 
     } catch (const std::exception& exception) {
         spdlog::error("Failed loading configurations: " + std::string(exception.what()));
-        throw exception;
+        std::rethrow_exception(std::current_exception());
     }
 }
 

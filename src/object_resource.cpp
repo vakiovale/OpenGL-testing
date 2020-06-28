@@ -70,7 +70,7 @@ std::vector<ObjectResource> initializeResourceObjects() {
         }
     } catch (const std::exception& exception) {
         spdlog::error("Failed parsing json: " + std::string(exception.what()));
-        throw exception;
+        std::rethrow_exception(std::current_exception());
     }
     spdlog::info("Finished loading resources");
     return resources;
