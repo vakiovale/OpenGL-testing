@@ -17,7 +17,7 @@
 typedef struct {
     std::string file;
     RawDataObject object;
-    glm::vec3 translate;
+    glm::vec3 position;
     glm::vec3 scale;
 } ObjectResource;
 

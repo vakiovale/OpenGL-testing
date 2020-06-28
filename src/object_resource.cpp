@@ -6,9 +6,9 @@ ObjectResource loadResource(
     std::string file = object.second.get<std::string>("file");
     result.file = file;
     result.object = loadObject(file);
-    auto translate = object.second.get_child("translate");
-    result.translate =
-        glm::vec3(translate.get<float>("x"), translate.get<float>("y"), translate.get<float>("z"));
+    auto position = object.second.get_child("position");
+    result.position =
+        glm::vec3(position.get<float>("x"), position.get<float>("y"), position.get<float>("z"));
     auto scale = object.second.get_optional<float>("scale");
     if (scale.has_value()) {
         result.scale = glm::vec3(scale.get(), scale.get(), scale.get());

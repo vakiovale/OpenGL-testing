@@ -126,11 +126,10 @@ void Renderer::render() {
 }
 
 glm::mat4 Renderer::createModel(const ObjectResource& resource) const {
-    const float angle = glfwGetTime() * 1.0f;
     glm::mat4 translate =
-        glm::translate(glm::vec3(0.0f, sin(angle) * 10.0f, 0.0f) + resource.translate);
+        glm::translate(resource.position);
     glm::mat4 scale = glm::scale(resource.scale);
-    glm::mat4 rotate = glm::rotate(angle, glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 rotate = glm::rotate(1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     return translate * rotate * scale;
 }
 
