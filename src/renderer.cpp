@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "glm/gtc/quaternion.hpp"
 
 Renderer::Renderer(GLFWwindow* window) : window(*window) {}
 
@@ -7,6 +8,10 @@ Renderer::~Renderer() {
     glDeleteVertexArrays(vertex_array_objects_.size(), vertex_array_objects_.data());
     glDeleteProgram(program_);
     spdlog::info("Renderer destroyed");
+}
+
+void Renderer::setCamera(const Camera& camera) {
+    camera_ = &camera;
 }
 
 void Renderer::createProgram() {
@@ -44,10 +49,8 @@ glm::mat4 Renderer::selectCameraLens(float field_of_view) const {
 }
 
 glm::mat4 Renderer::setupCameraPosition() const {
-    glm::vec3 camera_position = glm::vec3(4, 3, 20);
-    glm::vec3 camera_look_at = glm::vec3();
-    glm::vec3 camera_rotation = glm::vec3(0, 1, 0);
-    return glm::lookAt(camera_position, camera_look_at, camera_rotation);
+    return glm::mat4_cast(camera_->orientation) * glm::translate(glm::mat4(1.0), camera_->position);
+    //return glm::lookAt(camera_->position, camera_->look_at, camera_->rotation);
 }
 
 glm::mat4 Renderer::setupModel() const {
@@ -60,12 +63,12 @@ glm::mat4 Renderer::setupModel() const {
 }
 
 void Renderer::createVAOsAndGenerateBuffers() {
-    GLuint vaos[resources_.size()];
-    GLuint buffers[resources_.size()];
-    glCreateVertexArrays(resources_.size(), vaos);
-    glGenBuffers(resources_.size(), buffers);
+    GLuint vaos[resources_->size()];
+    GLuint buffers[resources_->size()];
+    glCreateVertexArrays(resources_->size(), vaos);
+    glGenBuffers(resources_->size(), buffers);
 
-    for (std::size_t i = 0; i < resources_.size(); i++) {
+    for (std::size_t i = 0; i < resources_->size(); i++) {
         vertex_array_objects_.push_back(vaos[i]);
         vertex_buffer_objects_.push_back(buffers[i]);
     }
@@ -92,11 +95,11 @@ void Renderer::loadAndBindObject(const ObjectResource& resource, const GLuint VA
     glEnableVertexAttribArray(vColor);
 }
 
-void Renderer::initialize(std::vector<ObjectResource> resources) {
+void Renderer::initialize(std::vector<ObjectResource>& resources) {
     spdlog::info("Initializing OpenGL");
     enableDebug();
 
-    resources_ = resources;
+    resources_ = &resources;
 
     glfwGetWindowSize(&window, &width_, &height_);
 
@@ -104,8 +107,8 @@ void Renderer::initialize(std::vector<ObjectResource> resources) {
     createVAOsAndGenerateBuffers();
 
     spdlog::info("Load and bind objects");
-    for (std::size_t i = 0; i < resources_.size(); i++) {
-        loadAndBindObject(resources_[i], vertex_array_objects_[i], vertex_buffer_objects_[i]);
+    for (std::size_t i = 0; i < resources_->size(); i++) {
+        loadAndBindObject((*resources_)[i], vertex_array_objects_[i], vertex_buffer_objects_[i]);
     }
     spdlog::info("Loading objects finished");
 
@@ -134,11 +137,11 @@ glm::mat4 Renderer::createModel(const ObjectResource& resource) const {
 }
 
 void Renderer::draw() {
-    glm::mat4 projection = selectCameraLens(120.0f);
+    glm::mat4 projection = selectCameraLens(80.0f);
     glm::mat4 view = setupCameraPosition();
 
-    for (std::size_t i = 0; i < resources_.size(); i++) {
-        const auto& resource = resources_[i];
+    for (std::size_t i = 0; i < resources_->size(); i++) {
+        const auto& resource = (*resources_)[i];
         glm::mat4 model = createModel(resource);
         glm::mat4 mvp = projection * view * model;
 

@@ -1,3 +1,4 @@
+
 #include "message_callback.h"
 
 static void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id, GLenum severity,

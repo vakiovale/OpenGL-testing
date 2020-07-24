@@ -11,6 +11,7 @@
 #include <glm/gtx/transform.hpp>
 #include <thread>
 
+#include "camera.h"
 #include "file_loader.h"
 #include "glfw.h"
 #include "message_callback.h"
@@ -32,7 +33,8 @@ class Renderer {
 
     void draw();
 
-    std::vector<ObjectResource> resources_;
+    std::vector<ObjectResource>* resources_;
+    const Camera* camera_;
     std::vector<GLuint> vertex_array_objects_;
     std::vector<GLuint> vertex_buffer_objects_;
     GLuint program_;
@@ -45,7 +47,8 @@ class Renderer {
    public:
     Renderer(GLFWwindow* window);
     ~Renderer();
-    void initialize(std::vector<ObjectResource> resources);
+    void initialize(std::vector<ObjectResource>& resources);
+    void setCamera(const Camera& camera);
     void render();
     void createProgram();
 };
